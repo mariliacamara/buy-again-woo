@@ -106,6 +106,12 @@ add_action('template_redirect', function () {
         $added++;
     }
 
+    /**
+     * Redirect to cart
+     */
+    wp_safe_redirect(wc_get_cart_url());
+    exit;
+
     wc_add_notice(
         sprintf(
             '%d produto(s) adicionados ao carrinho.',
