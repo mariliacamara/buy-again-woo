@@ -89,6 +89,7 @@ add_action('template_redirect', function () {
     WC()->cart->empty_cart();
 
     $added = 0;
+    $failed = [];
 
     foreach ($order->get_items() as $item) {
 
@@ -113,29 +114,39 @@ add_action('template_redirect', function () {
             }
         }
 
-        WC()->cart->add_to_cart(
+        $result = WC()->cart->add_to_cart(
             $product_id,
             $quantity,
             $variation_id,
             $variation
         );
+
+        if ($result) {
+            $added++;
+        } else {
+            $failed[] = $item->get_name();
+        }
     }
 
-    // foreach ($order->get_items() as $item) {
+    if ($added > 0) {
+        wc_add_notice(
+            sprintf(
+                '%d produto(s) adicionados ao carrinho.',
+                $added
+            ),
+            'success'
+        );
+    }
 
-    //     $product_id = $item->get_product_id();
-
-    //     if (!$product_id) {
-    //         continue;
-    //     }
-
-    //     WC()->cart->add_to_cart(
-    //         $product_id,
-    //         $item->get_quantity()
-    //     );
-
-    //     $added++;
-    // }
+    if (!empty($failed)) {
+        wc_add_notice(
+            sprintf(
+                'Os seguintes produtos não puderam ser adicionados: %s',
+                implode(', ', $failed)
+            ),
+            'notice'
+        );
+    }
 
     /**
      * Redirect to cart
