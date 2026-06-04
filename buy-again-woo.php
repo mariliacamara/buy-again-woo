@@ -30,3 +30,18 @@ add_filter(
     10,
     2
 );
+
+add_action('template_redirect', function () {
+
+    if (!isset($_GET['buy_again'])) {
+        return;
+    }
+
+    wc_add_notice(
+        sprintf(
+            'Pedido recebido: %d',
+            absint($_GET['buy_again'])
+        ),
+        'success'
+    );
+});
