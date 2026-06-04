@@ -50,12 +50,14 @@ add_action('template_redirect', function () {
         return;
     }
 
+    $products = [];
+
+    foreach ($order->get_items() as $item) {
+        $products[] = $item->get_name();
+    }
+
     wc_add_notice(
-        sprintf(
-            'Encomenda #%d encontrada com %d item(ns).',
-            $order->get_id(),
-            count($order->get_items())
-        ),
+        'Produtos encontrados: ' . implode(', ', $products),
         'success'
     );
 });
