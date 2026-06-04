@@ -92,19 +92,32 @@ add_action('template_redirect', function () {
 
     foreach ($order->get_items() as $item) {
 
-        $product_id = $item->get_product_id();
+    wc_add_notice(
+        sprintf(
+            'Produto: %s | Produto ID: %d | Variação ID: %d',
+            $item->get_name(),
+            $item->get_product_id(),
+            $item->get_variation_id()
+        ),
+        'notice'
+    );
+}
 
-        if (!$product_id) {
-            continue;
-        }
+    // foreach ($order->get_items() as $item) {
 
-        WC()->cart->add_to_cart(
-            $product_id,
-            $item->get_quantity()
-        );
+    //     $product_id = $item->get_product_id();
 
-        $added++;
-    }
+    //     if (!$product_id) {
+    //         continue;
+    //     }
+
+    //     WC()->cart->add_to_cart(
+    //         $product_id,
+    //         $item->get_quantity()
+    //     );
+
+    //     $added++;
+    // }
 
     /**
      * Redirect to cart
