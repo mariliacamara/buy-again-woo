@@ -16,7 +16,12 @@ add_filter(
     function ($actions, $order) {
 
         $actions['buy_again'] = [
-            'url'  => '#',
+            'url'  => add_query_arg(
+                [
+                    'buy_again' => $order->get_id(),
+                ],
+                wc_get_cart_url()
+            ),
             'name' => __('Comprar Novamente', 'buy-again-woo'),
         ];
 
