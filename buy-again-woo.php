@@ -83,6 +83,11 @@ add_action('template_redirect', function () {
         return;
     }
 
+    /**
+     * Clear cart before re-creating the order
+     */
+    WC()->cart->empty_cart();
+
     $added = 0;
 
     foreach ($order->get_items() as $item) {
