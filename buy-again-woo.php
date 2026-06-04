@@ -42,22 +42,27 @@ add_action('template_redirect', function () {
     $order = wc_get_order($order_id);
 
     if (!$order) {
-        wc_add_notice(
-            sprintf('Encomenda %d não encontrada.', $order_id),
-            'error'
-        );
-
         return;
     }
 
-    $products = [];
+    $items = $order->get_items();
 
-    foreach ($order->get_items() as $item) {
-        $products[] = $item->get_name();
+    $first_item = reset($items);
+
+    if (!$first_item) {
+        wc_add_notice('Nenhum produto encontrado na encomenda.', 'error');
+        return;
     }
 
+    $product_id = $first_item->get_product_id();
+
+    WC()->cart->add_to_cart($product_id, 1);
+
     wc_add_notice(
-        'Produtos encontrados: ' . implode(', ', $products),
+        sprintf(
+            'Produto %d adicionado ao carrinho.',
+            $product_id
+        ),
         'success'
     );
 });
