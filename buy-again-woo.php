@@ -37,10 +37,24 @@ add_action('template_redirect', function () {
         return;
     }
 
+    $order_id = absint($_GET['buy_again']);
+
+    $order = wc_get_order($order_id);
+
+    if (!$order) {
+        wc_add_notice(
+            sprintf('Encomenda %d não encontrada.', $order_id),
+            'error'
+        );
+
+        return;
+    }
+
     wc_add_notice(
         sprintf(
-            'Pedido recebido: %d',
-            absint($_GET['buy_again'])
+            'Encomenda #%d encontrada com %d item(ns).',
+            $order->get_id(),
+            count($order->get_items())
         ),
         'success'
     );
