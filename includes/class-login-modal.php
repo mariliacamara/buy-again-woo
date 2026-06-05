@@ -42,6 +42,17 @@ class Buy_Again_Login_Modal
 
     public function enqueue_assets()
     {
+        if (!is_user_logged_in()) {
+            return;
+        }
+
+        wp_enqueue_style(
+            'buy-again-login-modal',
+            plugin_dir_url(__FILE__) . '../assets/css/login-modal.css',
+            [],
+            '1.0.0'
+        );
+
         wp_enqueue_script(
             'buy-again-login-modal',
             plugin_dir_url(__FILE__) . '../assets/js/login-modal.js',
@@ -64,6 +75,7 @@ class Buy_Again_Login_Modal
             return;
         }
 
+        // Remove o cookie para exibir apenas uma vez
         setcookie(
             'buy_again_show_modal',
             '',
@@ -76,7 +88,10 @@ class Buy_Again_Login_Modal
         ?>
         <div id="buy-again-modal" class="buy-again-modal">
 
-            <div class="buy-again-modal__overlay"></div>
+            <div
+                class="buy-again-modal__overlay"
+                data-close-buy-again-modal
+            ></div>
 
             <div class="buy-again-modal__content">
 
