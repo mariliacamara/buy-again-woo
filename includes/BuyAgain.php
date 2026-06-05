@@ -113,8 +113,6 @@ class BuyAgain {
 			return;
 		}
 
-		WC()->cart->empty_cart();
-
 		$added  = 0;
 		$failed = array();
 

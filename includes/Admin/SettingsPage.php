@@ -86,53 +86,55 @@ class SettingsPage {
 	 */
 	public function render_page(): void {
 
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		$active_tab = isset( $_GET['tab'] )
-		? sanitize_key( wp_unslash( $_GET['tab'] ) )
-		: 'general';
+			? sanitize_key( wp_unslash( $_GET['tab'] ) )
+			: 'general';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		?>
 
-	<div class="wrap">
+		<div class="wrap">
 
-		<h1>
-			<?php esc_html_e( 'Buy Again', 'buy-again-woo' ); ?>
-		</h1>
+			<h1>
+				<?php esc_html_e( 'Buy Again', 'buy-again-woo' ); ?>
+			</h1>
 
-		<nav class="nav-tab-wrapper">
+			<nav class="nav-tab-wrapper">
 
-			<a
-				href="<?php echo esc_url( admin_url( 'admin.php?page=buy-again-woo&tab=general' ) ); ?>"
-				class="nav-tab <?php echo ( 'general' === $active_tab ) ? 'nav-tab-active' : ''; ?>"
-			>
-				<?php esc_html_e( 'General', 'buy-again-woo' ); ?>
-			</a>
+				<a
+					href="<?php echo esc_url( admin_url( 'admin.php?page=buy-again-woo&tab=general' ) ); ?>"
+					class="nav-tab <?php echo ( 'general' === $active_tab ) ? 'nav-tab-active' : ''; ?>"
+				>
+					<?php esc_html_e( 'General', 'buy-again-woo' ); ?>
+				</a>
 
-			<a
-				href="<?php echo esc_url( admin_url( 'admin.php?page=buy-again-woo&tab=styles' ) ); ?>"
-				class="nav-tab <?php echo ( 'styles' === $active_tab ) ? 'nav-tab-active' : ''; ?>"
-			>
-				<?php esc_html_e( 'Styles', 'buy-again-woo' ); ?>
-			</a>
+				<a
+					href="<?php echo esc_url( admin_url( 'admin.php?page=buy-again-woo&tab=styles' ) ); ?>"
+					class="nav-tab <?php echo ( 'styles' === $active_tab ) ? 'nav-tab-active' : ''; ?>"
+				>
+					<?php esc_html_e( 'Styles', 'buy-again-woo' ); ?>
+				</a>
 
-		</nav>
+			</nav>
 
-		<?php if ( 'general' === $active_tab ) : ?>
+			<?php if ( 'general' === $active_tab ) : ?>
 
-			<p>
-				<?php esc_html_e( 'General settings coming soon.', 'buy-again-woo' ); ?>
-			</p>
+				<p>
+					<?php esc_html_e( 'General settings coming soon.', 'buy-again-woo' ); ?>
+				</p>
 
-		<?php endif; ?>
+			<?php endif; ?>
 
-		<?php if ( 'styles' === $active_tab ) : ?>
+			<?php if ( 'styles' === $active_tab ) : ?>
 
-			<p>
-				<?php esc_html_e( 'Styles settings coming soon.', 'buy-again-woo' ); ?>
-			</p>
+				<p>
+					<?php esc_html_e( 'Styles settings coming soon.', 'buy-again-woo' ); ?>
+				</p>
 
-		<?php endif; ?>
+			<?php endif; ?>
 
-	</div>
+		</div>
 
 		<?php
 	}
