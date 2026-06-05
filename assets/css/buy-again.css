@@ -1,0 +1,10 @@
+.woocommerce-account a.buy_again {
+    background-color: #37bdd6 !important;
+    border-color: #37bdd6 !important;
+    color: #ffffff !important;
+}
+
+.woocommerce-account a.buy_again:hover {
+    background-color: #2aa8c0 !important;
+    border-color: #2aa8c0 !important;
+}
