@@ -9,6 +9,11 @@ class Buy_Again_Login_Modal
     public function __construct()
     {
         add_action(
+            'wp_enqueue_scripts',
+            [$this, 'enqueue_assets']
+        );
+        
+        add_action(
             'wp_login',
             [$this, 'mark_login'],
             10,
@@ -32,6 +37,17 @@ class Buy_Again_Login_Modal
             '1',
             time() + 300,
             COOKIEPATH ?: '/'
+        );
+    }
+
+    public function enqueue_assets()
+    {
+        wp_enqueue_script(
+            'buy-again-login-modal',
+            plugin_dir_url(__FILE__) . '../assets/js/login-modal.js',
+            [],
+            '1.0.0',
+            true
         );
     }
 
