@@ -48,6 +48,13 @@ class Buy_Again_Login_Modal
             return;
         }
 
+        setcookie(
+            'buy_again_show_modal',
+            '',
+            time() - 3600,
+            COOKIEPATH ?: '/'
+        );
+
         $user = wp_get_current_user();
 
         ?>
@@ -64,6 +71,14 @@ class Buy_Again_Login_Modal
                     z-index:99999;
                 "
             >
+
+                <button
+                    type="button"
+                    data-close-buy-again-modal
+                >
+                    X
+                </button>
+
                 <h3>
                     Olá, <?php echo esc_html($user->display_name); ?>
                 </h3>
