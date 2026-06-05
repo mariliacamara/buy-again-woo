@@ -11,12 +11,12 @@
 }
 
 .buy-again-modal__content {
-    position: absolute;
+    position: relative;
     top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 420px;
+    width: 600px;
     max-width: 90vw;
 
     background: #ffffff;
@@ -31,25 +31,32 @@
 }
 
 .buy-again-modal__close {
-    position: absolute;
-    top: 8px;
-    right: 12px;
+    position: absolute !important;
 
-    background: transparent;
-    border: 0;
+    top: 12px !important;
+    right: 18px !important;
 
-    color: #081d7a;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1;
+    width: 40px !important;
+    height: 40px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    color: #081d7a !important;
+    font-size: 42px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
 
     cursor: pointer;
-
-    padding: 0;
-    margin: 0;
-
-    width: auto;
-    height: auto;
+    z-index: 9999;
 }
 
 .buy-again-modal__content h3 {
@@ -58,12 +65,12 @@
     font-weight: 700;
     line-height: 1.2;
 
-    margin: 0 0 16px;
+    margin: 24px 0 24px;
 }
 
 .buy-again-modal__message {
     color: #081d7a;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.3;
 
