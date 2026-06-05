@@ -37,13 +37,10 @@ jobs:
 
       - name: Create plugin zip
         run: |
-          mkdir release
+          mkdir -p release
 
           rsync -av . release/buy-again-woo \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='node_modules' \
-            --exclude='.DS_Store'
+            --exclude-from=.distignore
 
           cd release
           zip -r buy-again-woo.zip buy-again-woo
