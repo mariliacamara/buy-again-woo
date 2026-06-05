@@ -27,3 +27,15 @@
     background-color: #2aa8c0 !important;
     border-color: #2aa8c0 !important;
 }
+
+.buy-again-continue-shopping {
+    background: #081d7a !important;
+    color: #fff !important;
+    border-color: #081d7a !important;
+    float: right;
+    margin-top: 20px;
+}
+
+.buy-again-continue-shopping:hover {
+    color: #fff !important;
+}

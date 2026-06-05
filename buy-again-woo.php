@@ -11,8 +11,10 @@ if (!defined('ABSPATH')) {
 }
 
 require_once plugin_dir_path(__FILE__) . 'includes/class-buy-again.php';
+require_once plugin_dir_path(__FILE__) . 'includes/class-login-modal.php';
 
 new Buy_Again();
+new Buy_Again_Login_Modal();
 
 add_action('wp_enqueue_scripts', function () {
 
