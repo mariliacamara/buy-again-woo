@@ -5,6 +5,8 @@
  * @package BuyAgainWoo
  */
 
+namespace Marilia\BuyAgainWoo;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handles buy again functionality.
  */
-class Buy_Again {
+class BuyAgain {
 	/**
 	 * Constructor.
 	 */

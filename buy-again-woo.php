@@ -9,15 +9,17 @@
  * @package BuyAgainWoo
  */
 
+use Marilia\BuyAgainWoo\BuyAgain;
+use Marilia\BuyAgainWoo\BuyAgainLoginModal;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-buy-again.php';
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-buy-again-login-modal.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-new Buy_Again();
-new Buy_Again_Login_Modal();
+new BuyAgain();
+new BuyAgainLoginModal();
 
 add_action(
 	'wp_enqueue_scripts',

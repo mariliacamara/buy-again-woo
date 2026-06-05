@@ -3,6 +3,16 @@
     "description": "Buy Again functionality for WooCommerce",
     "type": "project",
     "license": "MIT",
+    "scripts": {
+        "lint": "phpcs",
+        "lint:fix": "phpcbf",
+        "analyse": "php -d memory_limit=1G vendor/bin/phpstan analyse",
+        "autoload": "composer dump-autoload",
+        "check": [
+            "@lint",
+            "@analyse"
+        ]
+    },
     "autoload": {
         "psr-4": {
             "Marilia\\BuyAgainWoo\\": "includes/"
@@ -13,12 +23,6 @@
             "name": "Marilia Camara"
         }
     ],
-    "scripts": {
-        "lint": "phpcs",
-        "lint:fix": "phpcbf",
-        "analyse": "php -d memory_limit=1G vendor/bin/phpstan analyse",
-        "autoload": "composer dump-autoload"
-    },
     "autoload-dev": {
         "psr-4": {
             "Marilia\\BuyAgainWoo\\Tests\\": "tests/"

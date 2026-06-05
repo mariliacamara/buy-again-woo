@@ -5,6 +5,8 @@
  * @package BuyAgainWoo
  */
 
+namespace Marilia\BuyAgainWoo;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -12,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handles login modal functionality.
  */
-class Buy_Again_Login_Modal {
+class BuyAgainLoginModal {
 	/**
 	 * Constructor.
 	 */
