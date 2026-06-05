@@ -37,11 +37,6 @@ class BuyAgainLoginModal {
 			'wp_footer',
 			array( $this, 'render_modal' )
 		);
-
-		add_action(
-			'wp_ajax_buy_again_close_modal',
-			array( $this, 'close_modal' )
-		);
 	}
 
 	/**
@@ -106,6 +101,11 @@ class BuyAgainLoginModal {
 			return;
 		}
 
+		delete_user_meta(
+			get_current_user_id(),
+			'_buy_again_show_modal'
+		);
+
 		$user = wp_get_current_user();
 
 		?>
@@ -163,19 +163,5 @@ class BuyAgainLoginModal {
 
 		</div>
 		<?php
-	}
-
-	/**
-	 * Close modal.
-	 *
-	 * @return void
-	 */
-	public function close_modal() {
-			delete_user_meta(
-				get_current_user_id(),
-				'_buy_again_show_modal'
-			);
-
-			wp_send_json_success();
 	}
 }
