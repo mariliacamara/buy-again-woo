@@ -11,6 +11,11 @@
         "check": [
             "@lint",
             "@analyse"
+        ],
+        "build": [
+            "composer check",
+            "composer install --no-dev --optimize-autoloader",
+            "composer dump-autoload -o"
         ]
     },
     "autoload": {
