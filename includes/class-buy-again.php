@@ -112,12 +112,11 @@ class Buy_Again {
 		$added  = 0;
 		$failed = array();
 
-    /** @var WC_Order_Item_Product $item */
 		foreach ( $order->get_items() as $item ) {
 
-      if ( ! $item instanceof WC_Order_Item_Product ) {
-        continue;
-      }
+			if ( ! $item instanceof WC_Order_Item_Product ) {
+				continue;
+			}
 
 			$product_id   = $item->get_product_id();
 			$variation_id = $item->get_variation_id();
@@ -133,10 +132,10 @@ class Buy_Again {
 				$variation_product = wc_get_product( $variation_id );
 
 				if (
-          $variation_product instanceof WC_Product_Variation
-        ) {
-          $variation = $variation_product->get_variation_attributes();
-        }
+				$variation_product instanceof WC_Product_Variation
+				) {
+					$variation = $variation_product->get_variation_attributes();
+				}
 			}
 
 			$result = WC()->cart->add_to_cart(
