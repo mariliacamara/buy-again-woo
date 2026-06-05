@@ -12,7 +12,7 @@ class Buy_Again_Login_Modal
             'wp_enqueue_scripts',
             [$this, 'enqueue_assets']
         );
-        
+
         add_action(
             'wp_login',
             [$this, 'mark_login'],
@@ -74,25 +74,18 @@ class Buy_Again_Login_Modal
         $user = wp_get_current_user();
 
         ?>
-        <div id="buy-again-modal">
-            <div
-                style="
-                    position:fixed;
-                    top:50%;
-                    left:50%;
-                    transform:translate(-50%,-50%);
-                    background:#fff;
-                    padding:30px;
-                    border:1px solid #ccc;
-                    z-index:99999;
-                "
-            >
+        <div id="buy-again-modal" class="buy-again-modal">
+
+            <div class="buy-again-modal__overlay"></div>
+
+            <div class="buy-again-modal__content">
 
                 <button
                     type="button"
+                    class="buy-again-modal__close"
                     data-close-buy-again-modal
                 >
-                    X
+                    ×
                 </button>
 
                 <h3>
@@ -104,24 +97,28 @@ class Buy_Again_Login_Modal
                     e refazer uma compra?
                 </p>
 
-                <p>
+                <div class="buy-again-modal__actions">
+
                     <a
                         href="<?php echo esc_url(
                             wc_get_account_endpoint_url('orders')
                         ); ?>"
-                        class="button"
+                        class="button buy-again-modal__history"
                     >
                         Histórico de Encomenda
                     </a>
 
                     <a
                         href="<?php echo esc_url(home_url('/')); ?>"
-                        class="button"
+                        class="button buy-again-modal__continue"
                     >
                         Continuar a Compra
                     </a>
-                </p>
+
+                </div>
+
             </div>
+
         </div>
         <?php
     }
