@@ -76,12 +76,14 @@ class Buy_Again_Login_Modal
         }
 
         // Remove o cookie para exibir apenas uma vez
+        /*
         setcookie(
             'buy_again_show_modal',
-            '',
-            time() - 3600,
+            '1',
+            time() + 300,
             COOKIEPATH ?: '/'
         );
+        */
 
         $user = wp_get_current_user();
 
