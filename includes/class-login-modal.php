@@ -28,15 +28,10 @@ class Buy_Again_Login_Modal
 
     public function mark_login($user_login, $user)
     {
-        if (headers_sent()) {
-            return;
-        }
-
-        setcookie(
-            'buy_again_show_modal',
-            '1',
-            time() + 300,
-            COOKIEPATH ?: '/'
+        update_user_meta(
+            $user->ID,
+            '_buy_again_show_modal',
+            1
         );
     }
 
@@ -68,22 +63,20 @@ class Buy_Again_Login_Modal
             return;
         }
 
-        if (
-            empty($_COOKIE['buy_again_show_modal']) ||
-            $_COOKIE['buy_again_show_modal'] !== '1'
-        ) {
+        $show_modal = get_user_meta(
+            get_current_user_id(),
+            '_buy_again_show_modal',
+            true
+        );
+
+        if (!$show_modal) {
             return;
         }
 
-        // Remove o cookie para exibir apenas uma vez
-        /*
-        setcookie(
-            'buy_again_show_modal',
-            '1',
-            time() + 300,
-            COOKIEPATH ?: '/'
+        delete_user_meta(
+            get_current_user_id(),
+            '_buy_again_show_modal'
         );
-        */
 
         $user = wp_get_current_user();
 
