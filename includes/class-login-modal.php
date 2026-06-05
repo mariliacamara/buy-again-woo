@@ -48,6 +48,8 @@ class Buy_Again_Login_Modal
             return;
         }
 
+        $user = wp_get_current_user();
+
         ?>
         <div id="buy-again-modal">
             <div
@@ -62,10 +64,31 @@ class Buy_Again_Login_Modal
                     z-index:99999;
                 "
             >
-                <h3>Modal de Teste</h3>
+                <h3>
+                    Olá, <?php echo esc_html($user->display_name); ?>
+                </h3>
 
                 <p>
-                    O login foi detectado com sucesso.
+                    Deseja aceder seu histórico de encomenda
+                    e refazer uma compra?
+                </p>
+
+                <p>
+                    <a
+                        href="<?php echo esc_url(
+                            wc_get_account_endpoint_url('orders')
+                        ); ?>"
+                        class="button"
+                    >
+                        Histórico de Encomenda
+                    </a>
+
+                    <a
+                        href="<?php echo esc_url(home_url('/')); ?>"
+                        class="button"
+                    >
+                        Continuar a Compra
+                    </a>
                 </p>
             </div>
         </div>
