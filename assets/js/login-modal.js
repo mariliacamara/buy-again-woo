@@ -6,12 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const closeModal = () => {
+    const closeModal = async () => {
+
+        await fetch('/wp-admin/admin-ajax.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                action: 'buy_again_close_modal',
+            }),
+        });
 
         modal.remove();
-
-        document.cookie =
-            'buy_again_show_modal=0; path=/; max-age=86400';
     };
 
     document
