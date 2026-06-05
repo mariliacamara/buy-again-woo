@@ -1,0 +1,39 @@
+{
+    "name": "marilia/buy-again-woo",
+    "description": "Buy Again functionality for WooCommerce",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Marilia\\BuyAgainWoo\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marilia Camara"
+        }
+    ],
+    "scripts": {
+        "lint": "phpcs",
+        "lint:fix": "phpcbf",
+        "analyse": "phpstan analyse",
+        "autoload": "composer dump-autoload"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Marilia\\BuyAgainWoo\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.11",
+        "wp-coding-standards/wpcs": "^3.3",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
+        "phpstan/phpstan": "^2.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

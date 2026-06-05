@@ -5,27 +5,33 @@
  * Version: 1.0.0
  * Author: Marilia Camara
  * Text Domain: buy-again-woo
+ *
+ * @package BuyAgainWoo
  */
-if (!defined('ABSPATH')) {
-    exit;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-require_once plugin_dir_path(__FILE__) . 'includes/class-buy-again.php';
-require_once plugin_dir_path(__FILE__) . 'includes/class-login-modal.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-buy-again.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-buy-again-login-modal.php';
 
 new Buy_Again();
 new Buy_Again_Login_Modal();
 
-add_action('wp_enqueue_scripts', function () {
+add_action(
+	'wp_enqueue_scripts',
+	function () {
 
-    if (!is_account_page()) {
-        return;
-    }
+		if ( ! is_account_page() ) {
+			return;
+		}
 
-    wp_enqueue_style(
-        'buy-again-woo',
-        plugin_dir_url(__FILE__) . 'assets/css/buy-again.css',
-        [],
-        '1.0.0'
-    );
-});
+		wp_enqueue_style(
+			'buy-again-woo',
+			plugin_dir_url( __FILE__ ) . 'assets/css/buy-again.css',
+			array(),
+			'1.0.0'
+		);
+	}
+);
