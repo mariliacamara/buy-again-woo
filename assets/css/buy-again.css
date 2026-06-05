@@ -1,3 +1,15 @@
+.woocommerce-account .woocommerce-orders-table__cell-order-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.woocommerce-account .woocommerce-orders-table__cell-order-actions .button {
+    width: 100%;
+    text-align: center;
+    margin: 0 !important;
+}
+
 .woocommerce-account a.buy_again {
     background-color: #37bdd6 !important;
     border-color: #37bdd6 !important;
