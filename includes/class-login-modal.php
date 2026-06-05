@@ -13,12 +13,14 @@ class Buy_Again_Login_Modal
             [$this, 'enqueue_assets']
         );
 
-        // add_action(
-        //     'wp_login',
-        //     [$this, 'mark_login'],
-        //     10,
-        //     2
-        // );
+        add_action(
+            'wp_login',
+            function ($user_login, $user) {
+                error_log('LOGIN HOOK');
+            },
+            10,
+            2
+        );
 
         add_action(
             'wp_footer',
