@@ -15,10 +15,8 @@ class Buy_Again_Login_Modal
 
         add_action(
             'wp_login',
-            function ($user_login, $user) {
-                error_log('LOGIN HOOK');
-            },
-            10,
+            [$this, 'mark_login'],
+            999,
             2
         );
 
@@ -28,14 +26,14 @@ class Buy_Again_Login_Modal
         );
     }
 
-    // public function mark_login($user_login, $user)
-    // {
-    //     update_user_meta(
-    //         $user->ID,
-    //         '_buy_again_show_modal',
-    //         1
-    //     );
-    // }
+    public function mark_login($user_login, $user)
+    {
+        update_user_meta(
+            $user->ID,
+            '_buy_again_show_modal',
+            1
+        );
+    }
 
     public function enqueue_assets()
     {
