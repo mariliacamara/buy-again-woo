@@ -13,12 +13,12 @@ class Buy_Again_Login_Modal
             [$this, 'enqueue_assets']
         );
 
-        add_action(
-            'wp_login',
-            [$this, 'mark_login'],
-            10,
-            2
-        );
+        // add_action(
+        //     'wp_login',
+        //     [$this, 'mark_login'],
+        //     10,
+        //     2
+        // );
 
         add_action(
             'wp_footer',
@@ -26,14 +26,14 @@ class Buy_Again_Login_Modal
         );
     }
 
-    public function mark_login($user_login, $user)
-    {
-        update_user_meta(
-            $user->ID,
-            '_buy_again_show_modal',
-            1
-        );
-    }
+    // public function mark_login($user_login, $user)
+    // {
+    //     update_user_meta(
+    //         $user->ID,
+    //         '_buy_again_show_modal',
+    //         1
+    //     );
+    // }
 
     public function enqueue_assets()
     {
