@@ -7,6 +7,10 @@
 
 namespace Marilia\BuyAgainWoo;
 
+use WC_Order;
+use WC_Order_Item_Product;
+use WC_Product_Variation;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

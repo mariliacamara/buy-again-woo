@@ -7,6 +7,8 @@
 
 namespace Marilia\BuyAgainWoo;
 
+use WP_User;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
