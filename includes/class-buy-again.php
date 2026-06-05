@@ -19,6 +19,11 @@ class Buy_Again
             'template_redirect',
             [$this, 'process_reorder']
         );
+
+        add_action(
+            'woocommerce_cart_actions',
+            [$this, 'render_continue_shopping_button']
+        );
     }
 
     public function add_button($actions, $order)
@@ -146,5 +151,17 @@ class Buy_Again
 
         wp_safe_redirect(wc_get_cart_url());
         exit;
+    }
+
+    public function render_continue_shopping_button()
+    {
+        ?>
+        <a
+            href="<?php echo esc_url(home_url('/')); ?>"
+            class="button buy-again-continue-shopping"
+        >
+            Continuar a Comprar
+        </a>
+        <?php
     }
 }
