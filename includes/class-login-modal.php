@@ -102,8 +102,8 @@ class Buy_Again_Login_Modal
                     Olá, <?php echo esc_html($user->display_name); ?>
                 </h3>
 
-                <p>
-                    Deseja aceder seu histórico de encomenda
+                <p class="buy-again-modal__message">
+                    Deseja aceder seu histórico de encomenda<br>
                     e refazer uma compra?
                 </p>
 
