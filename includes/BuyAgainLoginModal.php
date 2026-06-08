@@ -131,7 +131,7 @@ class BuyAgainLoginModal {
 				</h3>
 
 				<p class="buy-again-modal__message">
-					Deseja aceder seu histórico de encomenda<br>
+					Deseja aceder ao seu histórico de encomendas<br>
 					e refazer uma compra?
 				</p>
 
@@ -147,14 +147,14 @@ class BuyAgainLoginModal {
 						"
 						class="button buy-again-modal__history"
 					>
-						Histórico de Encomenda
+						Histórico de encomedas
 					</a>
 
 					<a
 						href="<?php echo esc_url( home_url( '/' ) ); ?>"
 						class="button buy-again-modal__continue"
 					>
-						Continuar a Compra
+						Continuar a compra
 					</a>
 
 				</div>
