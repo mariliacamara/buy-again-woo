@@ -1,0 +1,41 @@
+.shop_table tr :is(td):last-child {
+    display: flex;
+    align-items: end;
+    text-align: right;
+}
+
+.woocommerce-account .woocommerce-orders-table__cell-order-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.woocommerce-account .woocommerce-orders-table__cell-order-actions .button {
+    width: 100%;
+    max-width: 170px;
+    text-align: center;
+    margin: 0 !important;
+}
+
+.woocommerce-account a.buy_again {
+    background-color: #37bdd6 !important;
+    border-color: #37bdd6 !important;
+    color: #ffffff !important;
+}
+
+.woocommerce-account a.buy_again:hover {
+    background-color: #2aa8c0 !important;
+    border-color: #2aa8c0 !important;
+}
+
+.buy-again-continue-shopping {
+    background: #081d7a !important;
+    color: #fff !important;
+    border-color: #081d7a !important;
+    float: right;
+    margin-top: 20px;
+}
+
+.buy-again-continue-shopping:hover {
+    color: #fff !important;
+}

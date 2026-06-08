@@ -1,0 +1,8 @@
+.git
+.github
+.gitignore
+release
+node_modules
+phpcs.xml
+phpstan.neon
+README.md

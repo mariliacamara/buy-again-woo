@@ -1,0 +1,51 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run PHPCS
+        run: composer lint
+
+      - name: Run PHPStan
+        run: composer analyse
+
+      - name: Install production dependencies
+        run: |
+          rm -rf vendor
+          composer install --no-dev --optimize-autoloader
+
+      - name: Create plugin zip
+        run: |
+          mkdir -p release
+
+          rsync -av . release/buy-again-woo \
+            --exclude-from=.distignore
+
+          cd release
+          zip -r buy-again-woo.zip buy-again-woo
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/buy-again-woo.zip
