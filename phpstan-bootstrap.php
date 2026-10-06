@@ -5,6 +5,6 @@
  * @package BuyAgainWoo
  */
 
-define( 'BUY_AGAIN_WOO_VERSION', '1.0.0' );
+define( 'BUY_AGAIN_WOO_VERSION', 'dev' );
 define( 'BUY_AGAIN_WOO_PATH', __DIR__ . '/' );
 define( 'BUY_AGAIN_WOO_URL', 'https://example.com/wp-content/plugins/buy-again-woo/' );
