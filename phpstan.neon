@@ -7,6 +7,9 @@ parameters:
     excludePaths:
         - vendor
 
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+
     scanFiles:
         - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
         - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
