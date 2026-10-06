@@ -95,20 +95,35 @@ buy-again-woo/
 
 Releases are generated automatically through GitHub Actions.
 
-Create a new release tag:
+The plugin follows [Semantic Versioning](https://semver.org/):
+
+* **MAJOR** (`2.0.0`): breaking changes.
+* **MINOR** (`1.1.0`): new backwards-compatible features.
+* **PATCH** (`1.0.1`): backwards-compatible bug fixes.
+
+To publish a new version:
+
+1. Move the entries under `## [Unreleased]` in `CHANGELOG.md` to a new `## [x.y.z] - YYYY-MM-DD` section and update the compare links at the bottom.
+2. Bump the version in `buy-again-woo.php`, in both the `Version:` header and the `BUY_AGAIN_WOO_VERSION` constant.
+3. Merge to the production branch, then tag the release:
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.1.0
+git push origin v1.1.0
 ```
 
 The workflow will:
 
-1. Run PHPCS
-2. Run PHPStan
-3. Install production dependencies
-4. Generate the plugin ZIP package
-5. Publish a GitHub Release
+1. Check that the tag matches the plugin version and has a `CHANGELOG.md` entry
+2. Run PHPCS
+3. Run PHPStan
+4. Install production dependencies
+5. Generate the plugin ZIP package
+6. Publish a GitHub Release using the `CHANGELOG.md` section as release notes
+
+## Author
+
+Developed by [Camorim Tech](https://camorim.dev.br).
 
 ## License
 

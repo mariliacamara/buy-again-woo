@@ -86,7 +86,7 @@ class BuyAgain {
 			)
 		) {
 			wc_add_notice(
-				'Pedido inválido.',
+				__( 'Encomenda inválida.', 'buy-again-woo' ),
 				'error'
 			);
 
@@ -97,7 +97,7 @@ class BuyAgain {
 
 		if ( ! $order ) {
 			wc_add_notice(
-				'Encomenda não encontrada.',
+				__( 'Encomenda não encontrada.', 'buy-again-woo' ),
 				'error'
 			);
 
@@ -106,7 +106,7 @@ class BuyAgain {
 
 		if ( (int) $order->get_user_id() !== get_current_user_id() ) {
 			wc_add_notice(
-				'Não tem permissão para esta encomenda.',
+				__( 'Não tem permissão para esta encomenda.', 'buy-again-woo' ),
 				'error'
 			);
 
@@ -139,6 +139,15 @@ class BuyAgain {
 				$variation_product instanceof WC_Product_Variation
 				) {
 					$variation = $variation_product->get_variation_attributes();
+
+					// Attributes set to "Any" come back empty; restore them from the order item.
+					foreach ( $item->get_meta_data() as $meta ) {
+						$key = 'attribute_' . $meta->key;
+
+						if ( array_key_exists( $key, $variation ) && '' === $variation[ $key ] ) {
+							$variation[ $key ] = (string) $meta->value;
+						}
+					}
 				}
 			}
 
@@ -159,7 +168,13 @@ class BuyAgain {
 		if ( $added > 0 ) {
 			wc_add_notice(
 				sprintf(
-					'%d produto(s) adicionados ao carrinho.',
+					/* translators: %d: number of products added to the cart. */
+					_n(
+						'%d produto adicionado ao carrinho.',
+						'%d produtos adicionados ao carrinho.',
+						$added,
+						'buy-again-woo'
+					),
 					$added
 				),
 				'success'
@@ -169,7 +184,8 @@ class BuyAgain {
 		if ( ! empty( $failed ) ) {
 			wc_add_notice(
 				sprintf(
-					'Os seguintes produtos não puderam ser adicionados: %s',
+					/* translators: %s: comma-separated list of product names. */
+					__( 'Os seguintes produtos não puderam ser adicionados: %s', 'buy-again-woo' ),
 					implode( ', ', $failed )
 				),
 				'notice'
@@ -191,7 +207,7 @@ class BuyAgain {
 			href="<?php echo esc_url( home_url( '/' ) ); ?>"
 			class="button buy-again-continue-shopping"
 		>
-			Continuar a Comprar
+			<?php esc_html_e( 'Continuar a Comprar', 'buy-again-woo' ); ?>
 		</a>
 		<?php
 	}

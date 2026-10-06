@@ -67,16 +67,16 @@ class BuyAgainLoginModal {
 
 		wp_enqueue_style(
 			'buy-again-login-modal',
-			plugin_dir_url( __FILE__ ) . '../assets/css/login-modal.css',
+			BUY_AGAIN_WOO_URL . 'assets/css/login-modal.css',
 			array(),
-			'1.0.0'
+			BUY_AGAIN_WOO_VERSION
 		);
 
 		wp_enqueue_script(
 			'buy-again-login-modal',
-			plugin_dir_url( __FILE__ ) . '../assets/js/login-modal.js',
+			BUY_AGAIN_WOO_URL . 'assets/js/login-modal.js',
 			array(),
-			'1.0.0',
+			BUY_AGAIN_WOO_VERSION,
 			true
 		);
 	}
@@ -127,12 +127,20 @@ class BuyAgainLoginModal {
 				</button>
 
 				<h3>
-					Olá, <?php echo esc_html( $user->display_name ); ?>
+					<?php
+					echo esc_html(
+						sprintf(
+							/* translators: %s: customer display name. */
+							__( 'Olá, %s', 'buy-again-woo' ),
+							$user->display_name
+						)
+					);
+					?>
 				</h3>
 
 				<p class="buy-again-modal__message">
-					Deseja aceder ao seu histórico de encomendas<br>
-					e refazer uma compra?
+					<?php esc_html_e( 'Deseja aceder ao seu histórico de encomendas', 'buy-again-woo' ); ?><br>
+					<?php esc_html_e( 'e refazer uma compra?', 'buy-again-woo' ); ?>
 				</p>
 
 				<div class="buy-again-modal__actions">
@@ -147,14 +155,14 @@ class BuyAgainLoginModal {
 						"
 						class="button buy-again-modal__history"
 					>
-						Histórico de encomedas
+						<?php esc_html_e( 'Histórico de encomendas', 'buy-again-woo' ); ?>
 					</a>
 
 					<a
 						href="<?php echo esc_url( home_url( '/' ) ); ?>"
 						class="button buy-again-modal__continue"
 					>
-						Continuar a compra
+						<?php esc_html_e( 'Continuar a compra', 'buy-again-woo' ); ?>
 					</a>
 
 				</div>
