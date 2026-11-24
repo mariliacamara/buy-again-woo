@@ -1,0 +1,371 @@
+.ba-admin {
+  --ba-border: #dcdcde;
+  --ba-muted: #646970;
+  --ba-accent: var(--wp-admin-theme-color, #2271b1);
+  max-width: 1100px;
+}
+
+.ba-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ba-title .dashicons {
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  color: var(--ba-accent);
+}
+
+.ba-lead {
+  margin: 4px 0 20px;
+  font-size: 14px;
+  color: var(--ba-muted);
+}
+
+.ba-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+.ba-side {
+  position: sticky;
+  top: 52px;
+}
+
+@media (max-width: 960px) {
+  .ba-layout { grid-template-columns: 1fr; }
+  .ba-side { position: static; order: -1; }
+}
+
+.ba-card {
+  background: #fff;
+  border: 1px solid var(--ba-border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.ba-card h2 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ba-muted,
+.ba-help {
+  color: var(--ba-muted);
+  margin: 0 0 14px;
+}
+
+.ba-help {
+  display: block;
+  margin: 6px 0 0;
+  font-size: 12px;
+}
+
+.ba-field {
+  display: block;
+  margin-top: 16px;
+}
+
+.ba-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.ba-field select,
+.ba-field .regular-text {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Escolha do destino */
+.ba-segmented {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .ba-segmented { grid-template-columns: 1fr; }
+}
+
+.ba-segment input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ba-segment > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: 1px solid var(--ba-border);
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color .15s, background .15s;
+}
+
+.ba-segment .dashicons {
+  color: var(--ba-muted);
+}
+
+.ba-segment > span:hover {
+  border-color: #8c8f94;
+}
+
+.ba-segment input:checked + span {
+  border-color: var(--ba-accent);
+  background: color-mix(in srgb, var(--ba-accent) 8%, #fff);
+  box-shadow: inset 0 0 0 1px var(--ba-accent);
+  font-weight: 600;
+}
+
+.ba-segment input:checked + span .dashicons {
+  color: var(--ba-accent);
+}
+
+.ba-segment input:focus-visible + span {
+  outline: 2px solid var(--ba-accent);
+  outline-offset: 2px;
+}
+
+/* Cores */
+.ba-colors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
+/* Pré-visualização */
+.ba-preview-caption {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--ba-muted);
+}
+
+.ba-preview {
+  margin-bottom: 0;
+}
+
+.ba-preview .ba-help {
+  margin-top: 14px;
+}
+
+.ba-footer {
+  margin-top: 24px;
+  padding: 14px 0 4px;
+  border-top: 1px solid var(--ba-border);
+  font-size: 12px;
+  color: var(--ba-muted);
+}
+
+.ba-footer a {
+  text-decoration: none;
+}
+
+.ba-footer a:hover {
+  text-decoration: underline;
+}
+
+.ba-admin .submit {
+  padding-top: 0;
+}
+
+/* Cabeçalho de cartão com interruptor */
+.ba-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ba-card-head h2 {
+  margin: 0;
+}
+
+.ba-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+
+@media (max-width: 782px) {
+  .ba-two { grid-template-columns: 1fr; }
+}
+
+.ba-field .large-text {
+  width: 100%;
+}
+
+.ba-sub {
+  margin-top: 10px;
+}
+
+.ba-sub select,
+.ba-sub input {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Interruptor */
+.ba-switch {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ba-switch input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  width: 36px;
+  height: 20px;
+  margin: 0;
+  border: 0;
+  border-radius: 10px;
+  background: #c3c4c7;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.ba-switch input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform .15s;
+}
+
+.ba-switch input[type="checkbox"]:checked {
+  background: var(--ba-accent);
+}
+
+.ba-switch input[type="checkbox"]:checked::before {
+  transform: translateX(16px);
+}
+
+.ba-switch input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--ba-accent);
+  outline-offset: 2px;
+}
+
+/* Pré-visualização: usa as cores da loja (variáveis em #ba-preview) */
+.ba-preview-stage {
+  padding: 16px 12px;
+  border-radius: 6px;
+  background: #e8eaed;
+}
+
+.ba-preview-modal {
+  position: relative;
+  padding: 18px 16px 14px;
+  border: 2px solid #d9d9d9;
+  border-radius: 12px;
+  background: #fff;
+  text-align: center;
+}
+
+.ba-preview-close {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  color: var(--ba-cor-texto);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ba-preview-title,
+.ba-preview-message {
+  display: block;
+  color: var(--ba-cor-texto);
+  font-weight: 700;
+}
+
+.ba-preview-title {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.ba-preview-message {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.ba-preview-btn {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ba-preview-btn--primary {
+  background: var(--ba-cor-principal);
+}
+
+.ba-preview-btn--primary:hover {
+  background: var(--ba-cor-principal-hover);
+}
+
+.ba-preview-btn--secondary {
+  background: var(--ba-cor-secundaria);
+}
+
+.ba-preview-btn--small {
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.ba-preview-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 1px solid var(--ba-border);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.ba-preview-row--end {
+  justify-content: flex-end;
+}
+
+.ba-preview-off {
+  margin: 0;
+  padding: 10px;
+  border: 1px dashed var(--ba-border);
+  border-radius: 6px;
+  color: var(--ba-muted);
+  font-size: 12px;
+  text-align: center;
+}

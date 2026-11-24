@@ -60,7 +60,7 @@ class BuyAgain {
 				),
 				'buy_again_' . $order->get_id()
 			),
-			'name' => __( 'Comprar Novamente', 'buy-again-woo' ),
+			'name' => Settings::get()['order_button_text'],
 		);
 
 		return $actions;
@@ -202,13 +202,11 @@ class BuyAgain {
 	 * @return void
 	 */
 	public function render_continue_shopping_button() {
-		?>
-		<a
-			href="<?php echo esc_url( home_url( '/' ) ); ?>"
-			class="button buy-again-continue-shopping"
-		>
-			<?php esc_html_e( 'Continuar a Comprar', 'buy-again-woo' ); ?>
-		</a>
-		<?php
+		$s = Settings::get();
+		if ( ! $s['cart_enabled'] ) {
+			return;
+		}
+		$url = Settings::destination( $s['cart_type'], (int) $s['cart_page'], $s['cart_url'] );
+		echo '<a href="' . esc_url( $url ) . '" class="button buy-again-continue-shopping">' . esc_html( $s['cart_text'] ) . '</a>';
 	}
 }

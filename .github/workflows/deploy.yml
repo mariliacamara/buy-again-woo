@@ -1,0 +1,105 @@
+name: Deploy
+
+# Envia o plugin para as duas lojas:
+#   push em development → dev.zincomed.com e dev.farmacianovaporto.pt
+#   push em production  → zincomed.com e farmacianovaporto.pt
+# O repositório é público: servidor e pasta de cada loja vêm de secrets
+# (<LOJA>_BA_SERVER = user@ip, <LOJA>_BA_SITE = pasta public_html).
+# Cada servidor tem uma chave própria (secrets ZINCOMED_BA_SSH_KEY e NP_BA_SSH_KEY)
+# presa por comando forçado a ~/bin/plugin-deploy-rsync.sh <site> buy-again-woo, que só aceita
+# rsync para a pasta buy-again-woo da produção ou do dev desse site.
+on:
+  push:
+    branches: [development, production]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  # O deploy só corre se o PHPCS e o PHPStan passarem (os mesmos passos do ci.yml).
+  quality:
+    if: github.ref_name == 'development' || github.ref_name == 'production'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer install
+      - run: composer lint
+      - run: composer analyse
+
+  deploy:
+    needs: quality
+    if: github.ref_name == 'development' || github.ref_name == 'production'
+    name: ${{ matrix.loja }} (${{ github.ref_name }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - loja: zincomed
+            prefixo: ZINCOMED
+            dominio: zincomed.com
+          - loja: novaporto
+            prefixo: NP
+            dominio: farmacianovaporto.pt
+    steps:
+      # O repositório é público: o GitHub só esconde o secret inteiro (user@ip), não as partes.
+      # Sem isto, um erro de SSH mostraria o IP da origem (na Zincomed, por trás do Cloudflare).
+      - name: Esconder servidor nos registos
+        env:
+          SERVIDOR: ${{ secrets[format('{0}_BA_SERVER', matrix.prefixo)] }}
+          SITE: ${{ secrets[format('{0}_BA_SITE', matrix.prefixo)] }}
+        run: |
+          echo "::add-mask::${SERVIDOR#*@}"
+          echo "::add-mask::${SERVIDOR%@*}"
+          echo "::add-mask::$SITE"
+
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          coverage: none
+
+      - name: Sintaxe PHP
+        run: find . -name '*.php' -not -path './.git/*' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
+
+      - name: Chave SSH
+        env:
+          CHAVE: ${{ secrets[format('{0}_BA_SSH_KEY', matrix.prefixo)] }}
+          HOSTS: ${{ secrets[format('{0}_KNOWN_HOSTS', matrix.prefixo)] }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$CHAVE" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$HOSTS" > ~/.ssh/known_hosts
+
+      - name: Rsync
+        env:
+          SERVIDOR: ${{ secrets[format('{0}_BA_SERVER', matrix.prefixo)] }}
+          SITE: ${{ secrets[format('{0}_BA_SITE', matrix.prefixo)] }}
+        run: |
+          if [ "$GITHUB_REF_NAME" = production ]; then DESTINO="$SITE/wp-content/plugins/buy-again-woo/"; else DESTINO="$SITE/dev/wp-content/plugins/buy-again-woo/"; fi
+          rsync -rlptzi --delete --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
+            --exclude='.git*' --exclude='.github/' --exclude='.superpowers/' --exclude='docs/' --exclude='bin/' --exclude='tests/' \
+            --exclude='composer.*' --exclude='phpcs.xml' --exclude='phpstan*' --exclude='.distignore' --exclude='.DS_Store' \
+            -e "ssh -i ~/.ssh/deploy -p 65002 -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            ./ "$SERVIDOR:$DESTINO"
+
+      # Direto na origem: o Cloudflare da Zincomed dá 403 aos IPs do GitHub.
+      - name: Verificar o site
+        if: github.ref_name == 'production'
+        env:
+          SERVIDOR: ${{ secrets[format('{0}_BA_SERVER', matrix.prefixo)] }}
+          DOMINIO: ${{ matrix.dominio }}
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -A 'Mozilla/5.0 (deploy-check)' --resolve "$DOMINIO:443:${SERVIDOR#*@}" "https://$DOMINIO/")
+          echo "home: $code"
+          test "$code" = 200

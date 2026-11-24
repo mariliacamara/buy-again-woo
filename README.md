@@ -9,6 +9,7 @@ Adds a **Buy Again** feature to WooCommerce, allowing customers to quickly reord
 * Supports simple and variable products.
 * Displays a login welcome modal after authentication.
 * Includes a quick link to the customer's order history.
+* Everything is configurable in **Camorim Tech → Buy Again**: texts, colors, where each button goes and which parts are switched on, with a live preview.
 * Follows modern PHP development practices:
 
   * Composer
@@ -90,6 +91,20 @@ buy-again-woo/
 ├── composer.json
 └── buy-again-woo.php
 ```
+
+## Deploy
+
+Pushing to `development` deploys to both stores' staging sites; merging into `production` deploys to both live sites (`.github/workflows/deploy.yml`). Server addresses and paths come from repository secrets, never from the code: `<STORE>_BA_SERVER`, `<STORE>_BA_SITE`, `<STORE>_BA_SSH_KEY` and `<STORE>_KNOWN_HOSTS`. Each deploy key is locked on the server to an rsync into this plugin's folder.
+
+Integration tests run on the staging sites with WP-CLI:
+
+```bash
+bin/test-dev.sh [zincomed|novaporto|ambos] [filter]
+```
+
+## Camorim Tech menu
+
+`includes/camorim-tech-menu.php` creates the shared **Camorim Tech** admin menu. Every Camorim Tech plugin ships an identical copy; the first one loaded registers the menu, and each plugin adds its own page with `add_submenu_page( 'camorim-tech', ... )`. When the file changes, update it in every plugin at the same time.
 
 ## Release Process
 

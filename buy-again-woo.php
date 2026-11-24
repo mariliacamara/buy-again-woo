@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Buy Again for WooCommerce
  * Description: Buy Again functionality for WooCommerce.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Camorim Tech
  * Author URI: https://camorim.dev.br
  * License: MIT
@@ -18,8 +18,10 @@
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use Marilia\BuyAgainWoo\Admin\SettingsPage;
+use Marilia\BuyAgainWoo\Assets;
 use Marilia\BuyAgainWoo\BuyAgain;
 use Marilia\BuyAgainWoo\BuyAgainLoginModal;
+use Marilia\BuyAgainWoo\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -28,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin version.
  */
-define( 'BUY_AGAIN_WOO_VERSION', '1.1.0' );
+define( 'BUY_AGAIN_WOO_VERSION', '1.2.0' );
 
 /**
  * Plugin path.
@@ -42,6 +44,7 @@ define( 'BUY_AGAIN_WOO_URL', plugin_dir_url( __FILE__ ) );
 
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/includes/camorim-tech-menu.php';
 
 /**
  * Declare compatibility with WooCommerce High-Performance Order Storage.
@@ -94,6 +97,7 @@ add_action(
 					array(),
 					BUY_AGAIN_WOO_VERSION
 				);
+				wp_add_inline_style( 'buy-again-woo', Assets::css_variables( Settings::get() ) );
 			}
 		);
 	}
