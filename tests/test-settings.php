@@ -10,7 +10,7 @@ require __DIR__ . '/bootstrap.php';
 
 $original = get_option('buy_again_woo_settings', null);
 $paginas = array();
-register_shutdown_function(function () use ($original, &$paginas) {
+cl_cleanup(function () use ($original, &$paginas) {
     if ($original === null) delete_option('buy_again_woo_settings'); else update_option('buy_again_woo_settings', $original);
     foreach ($paginas as $p) wp_delete_post($p, true);
 });

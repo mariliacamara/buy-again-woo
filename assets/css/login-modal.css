@@ -50,7 +50,7 @@
     border: none !important;
     box-shadow: none !important;
 
-    color: #081d7a !important;
+    color: var(--ba-cor-texto, #081d7a) !important;
     font-size: 42px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
@@ -60,7 +60,7 @@
 }
 
 .buy-again-modal__content h3 {
-    color: #081d7a;
+    color: var(--ba-cor-texto, #081d7a);
     font-size: 24px;
     font-weight: 700;
     line-height: 1.2;
@@ -69,7 +69,7 @@
 }
 
 .buy-again-modal__message {
-    color: #081d7a;
+    color: var(--ba-cor-texto, #081d7a);
     font-size: 24px;
     font-weight: 700;
     line-height: 1.3;
@@ -111,20 +111,20 @@
 }
 
 .buy-again-modal__history {
-    background: #37bdd6 !important;
+    background: var(--ba-cor-principal, #37bdd6) !important;
 }
 
 .buy-again-modal__history:hover {
-    background: #2aa8c0 !important;
+    background: var(--ba-cor-principal-hover, #2aa8c0) !important;
     color: #ffffff !important;
 }
 
 .buy-again-modal__continue {
-    background: #081d7a !important;
+    background: var(--ba-cor-secundaria, #081d7a) !important;
 }
 
 .buy-again-modal__continue:hover {
-    background: #06145a !important;
+    background: color-mix(in srgb, var(--ba-cor-secundaria, #081d7a) 80%, #000) !important;
     color: #ffffff !important;
 }
 

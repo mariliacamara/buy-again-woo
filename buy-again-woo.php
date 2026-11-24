@@ -18,8 +18,10 @@
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use Marilia\BuyAgainWoo\Admin\SettingsPage;
+use Marilia\BuyAgainWoo\Assets;
 use Marilia\BuyAgainWoo\BuyAgain;
 use Marilia\BuyAgainWoo\BuyAgainLoginModal;
+use Marilia\BuyAgainWoo\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -94,6 +96,7 @@ add_action(
 					array(),
 					BUY_AGAIN_WOO_VERSION
 				);
+				wp_add_inline_style( 'buy-again-woo', Assets::css_variables( Settings::get() ) );
 			}
 		);
 	}
