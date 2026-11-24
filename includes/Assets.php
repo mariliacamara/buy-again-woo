@@ -26,7 +26,7 @@ final class Assets {
 	 * @return string
 	 */
 	public static function css_variables( array $s ): string {
-		$map = array(
+		$map      = array(
 			'--ba-cor-principal'       => 'color_primary',
 			'--ba-cor-principal-hover' => 'color_primary_hover',
 			'--ba-cor-secundaria'      => 'color_secondary',
