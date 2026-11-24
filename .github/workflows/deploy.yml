@@ -21,7 +21,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # O deploy só corre se o PHPCS e o PHPStan passarem (os mesmos passos do ci.yml).
+  quality:
+    if: github.ref_name == 'development' || github.ref_name == 'production'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer install
+      - run: composer lint
+      - run: composer analyse
+
   deploy:
+    needs: quality
     if: github.ref_name == 'development' || github.ref_name == 'production'
     name: ${{ matrix.loja }} (${{ github.ref_name }})
     runs-on: ubuntu-24.04
@@ -36,6 +51,17 @@ jobs:
             prefixo: NP
             dominio: farmacianovaporto.pt
     steps:
+      # O repositório é público: o GitHub só esconde o secret inteiro (user@ip), não as partes.
+      # Sem isto, um erro de SSH mostraria o IP da origem (na Zincomed, por trás do Cloudflare).
+      - name: Esconder servidor nos registos
+        env:
+          SERVIDOR: ${{ secrets[format('{0}_BA_SERVER', matrix.prefixo)] }}
+          SITE: ${{ secrets[format('{0}_BA_SITE', matrix.prefixo)] }}
+        run: |
+          echo "::add-mask::${SERVIDOR#*@}"
+          echo "::add-mask::${SERVIDOR%@*}"
+          echo "::add-mask::$SITE"
+
       - uses: actions/checkout@v5
 
       - uses: shivammathur/setup-php@v2

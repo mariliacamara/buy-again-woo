@@ -102,6 +102,9 @@ cl_assert(strpos($h, 'Voltar') !== false && strpos($h, 'href="https://exemplo.pt
 /* Cores */
 $css = Assets::css_variables(Settings::defaults());
 cl_assert(strpos($css, '--ba-cor-principal:#37bdd6') !== false && strpos($css, '--ba-cor-principal-hover:#2aa8c0') !== false && strpos($css, '--ba-cor-secundaria:#081d7a') !== false && strpos($css, '--ba-cor-texto:#081d7a') !== false, 'variáveis CSS com as cores');
+cl_assert(strpos($css, '--ba-cor-secundaria-hover:#061762') !== false, 'hover do segundo botão calculado no servidor (#081d7a 80% → #061762)');
+cl_assert(strpos(Assets::css_variables(array_merge(Settings::defaults(), array('color_secondary' => '#297131'))), '--ba-cor-secundaria-hover:#215a27') !== false, 'hover do segundo botão segue a cor gravada');
+cl_assert(strpos(file_get_contents(BUY_AGAIN_WOO_PATH . 'assets/css/login-modal.css'), 'color-mix') === false, 'CSS da loja sem color-mix (navegadores antigos)');
 $fixas = array();
 foreach (array('buy-again.css', 'login-modal.css') as $f) {
     $src = file_get_contents(BUY_AGAIN_WOO_PATH . 'assets/css/' . $f);

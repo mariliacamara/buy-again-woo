@@ -124,7 +124,7 @@
 }
 
 .buy-again-modal__continue:hover {
-    background: color-mix(in srgb, var(--ba-cor-secundaria, #081d7a) 80%, #000) !important;
+    background: var(--ba-cor-secundaria-hover, #061762) !important;
     color: #ffffff !important;
 }
 

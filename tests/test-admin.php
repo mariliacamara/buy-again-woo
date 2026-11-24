@@ -86,6 +86,9 @@ $reg = get_registered_settings();
 cl_assert(isset($reg[Settings::OPTION]) && !isset($reg['buy_again_woo_custom_css']), 'opção registada; CSS antigo não');
 cl_assert(isset($reg[Settings::OPTION]['sanitize_callback']) && is_callable($reg[Settings::OPTION]['sanitize_callback']), 'opção com validação');
 
+/* Revisão final */
+cl_assert(apply_filters('option_page_capability_buy_again_woo_settings', 'manage_options') === 'manage_woocommerce', 'gestor de loja consegue gravar (options.php pede manage_woocommerce)');
+
 cl_assert(BUY_AGAIN_WOO_VERSION === '1.2.0', 'versão 1.2.0 (' . BUY_AGAIN_WOO_VERSION . ')');
 
 cl_test_finish();

@@ -36,11 +36,32 @@ final class Assets {
 		$vars     = '';
 		foreach ( $map as $var => $key ) {
 			$color = isset( $s[ $key ] ) ? (string) $s[ $key ] : '';
-			if ( ! preg_match( '/^#[0-9a-f]{6}$/', $color ) ) {
+			if ( ! preg_match( '/^#[0-9a-f]{6}\z/', $color ) ) {
 				$color = $defaults[ $key ];
 			}
 			$vars .= $var . ':' . $color . ';';
+			if ( 'color_secondary' === $key ) {
+				$vars .= '--ba-cor-secundaria-hover:' . self::darken( $color, 0.8 ) . ';';
+			}
 		}
 		return ':root{' . rtrim( $vars, ';' ) . '}';
+	}
+
+	/**
+	 * Escurece uma cor #rrggbb multiplicando cada canal (0.8 = 20% mais escura).
+	 *
+	 * Feito no servidor porque color-mix() com var() deixa o fundo transparente
+	 * nos navegadores que não o suportam (iOS 15, Safari antes de 16.2).
+	 *
+	 * @param string $color  Cor #rrggbb.
+	 * @param float  $factor Fator de 0 a 1.
+	 * @return string
+	 */
+	private static function darken( string $color, float $factor ): string {
+		$out = '#';
+		foreach ( str_split( substr( $color, 1 ), 2 ) as $channel ) {
+			$out .= sprintf( '%02x', (int) round( hexdec( $channel ) * $factor ) );
+		}
+		return $out;
 	}
 }

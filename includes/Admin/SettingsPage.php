@@ -35,6 +35,16 @@ class SettingsPage {
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+		add_filter( 'option_page_capability_buy_again_woo_settings', array( $this, 'capability' ) );
+	}
+
+	/**
+	 * Permissão para gravar em options.php: a mesma da página (o padrão seria manage_options).
+	 *
+	 * @return string
+	 */
+	public function capability(): string {
+		return 'manage_woocommerce';
 	}
 
 	/**
