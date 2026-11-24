@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-24
+
+### Added
+
+- Settings page under the new shared **Camorim Tech** admin menu, with a live preview: every text, color, link and on/off switch of the order button, the post-login modal and the cart button can now be changed without code.
+- Option to show the post-login modal only to customers who already have orders (on by default).
+- Shared `includes/camorim-tech-menu.php`, meant to be copied unchanged into every Camorim Tech plugin.
+- Automatic deploy to both stores' staging (`development`) and production (`production`) sites.
+- Integration tests run on the staging sites (`bin/test-dev.sh`).
+
+### Changed
+
+- Default texts and colors are the ones used until 1.1.0, so existing stores look the same after updating.
+- The modal assets now load only when the modal is about to show.
+- The orders-table layout rule no longer applies to every WooCommerce table (it was squeezing the cart and totals tables on some themes).
+
+### Removed
+
+- The unused `buy_again_woo_custom_css` setting and the placeholder "General" and "Styles" tabs.
+
 ## [1.1.0] - 2026-10-06
 
 ### Added
@@ -35,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Welcome modal after customer login with a link to the order history.
 - Buy Again settings page under WooCommerce.
 
-[Unreleased]: https://github.com/mariliacamara/buy-again-woo/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/mariliacamara/buy-again-woo/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/mariliacamara/buy-again-woo/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/mariliacamara/buy-again-woo/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/mariliacamara/buy-again-woo/releases/tag/v1.0.0

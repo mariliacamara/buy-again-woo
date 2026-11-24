@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - development
-      - main
+      - production
 
   pull_request:
     branches:
       - development
-      - main
+      - production
 
 jobs:
   quality:

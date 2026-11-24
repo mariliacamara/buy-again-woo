@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Buy Again for WooCommerce
  * Description: Buy Again functionality for WooCommerce.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Camorim Tech
  * Author URI: https://camorim.dev.br
  * License: MIT
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin version.
  */
-define( 'BUY_AGAIN_WOO_VERSION', '1.1.0' );
+define( 'BUY_AGAIN_WOO_VERSION', '1.2.0' );
 
 /**
  * Plugin path.
