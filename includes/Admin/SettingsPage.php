@@ -154,7 +154,7 @@ class SettingsPage {
 				'id'                => 'ba_' . $prefix . '_page',
 				'selected'          => (int) $s[ $prefix . '_page' ],
 				'show_option_none'  => 'Selecionar página',
-				'option_none_value' => 0,
+				'option_none_value' => '0',
 			)
 		);
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
