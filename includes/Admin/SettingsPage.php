@@ -147,17 +147,17 @@ class SettingsPage {
 		}
 		echo '</div>';
 		echo '<div class="ba-sub" data-ba-show="page"><label class="screen-reader-text" for="ba_' . esc_attr( $prefix ) . '_page">Página</label>';
-		$dropdown = wp_dropdown_pages(
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_dropdown_pages escapa o que imprime.
+		wp_dropdown_pages(
 			array(
 				'name'              => $this->name( $prefix . '_page' ),
 				'id'                => 'ba_' . $prefix . '_page',
 				'selected'          => (int) $s[ $prefix . '_page' ],
 				'show_option_none'  => 'Selecionar página',
 				'option_none_value' => 0,
-				'echo'              => 0,
 			)
 		);
-		echo $dropdown; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML gerado e escapado por wp_dropdown_pages.
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo '</div>';
 		echo '<div class="ba-sub" data-ba-show="url"><label class="screen-reader-text" for="ba_' . esc_attr( $prefix ) . '_url">URL</label><input type="url" class="regular-text" id="ba_' . esc_attr( $prefix ) . '_url" name="' . esc_attr( $this->name( $prefix . '_url' ) ) . '" placeholder="https://" value="' . esc_attr( (string) $s[ $prefix . '_url' ] ) . '"></div>';
 		echo '<span class="ba-help">Uma página apagada ou um URL vazio levam à página inicial.</span>';
