@@ -111,6 +111,9 @@ foreach (array('buy-again.css', 'login-modal.css') as $f) {
 }
 cl_assert(!$fixas, 'CSS sem cores fixas da Zincomed' . ($fixas ? ': ' . implode(', ', $fixas) : ''));
 
+$css_loja = file_get_contents(BUY_AGAIN_WOO_PATH . 'assets/css/buy-again.css');
+cl_assert(strpos($css_loja, '.shop_table tr') === false, 'CSS não mexe nas tabelas do carrinho e dos totais (só na das encomendas)');
+
 /* Repor encomenda */
 wc_load_cart();
 WC()->cart->empty_cart();

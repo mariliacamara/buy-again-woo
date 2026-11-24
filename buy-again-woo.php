@@ -44,6 +44,7 @@ define( 'BUY_AGAIN_WOO_URL', plugin_dir_url( __FILE__ ) );
 
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/includes/camorim-tech-menu.php';
 
 /**
  * Declare compatibility with WooCommerce High-Performance Order Storage.

@@ -1,4 +1,4 @@
-.shop_table tr :is(td):last-child {
+.woocommerce-account .woocommerce-orders-table tr td.woocommerce-orders-table__cell-order-actions {
     display: flex;
     align-items: end;
     text-align: right;
@@ -29,6 +29,7 @@
 }
 
 .buy-again-continue-shopping {
+    white-space: nowrap;
     background: var(--ba-cor-secundaria, #081d7a) !important;
     color: #fff !important;
     border-color: var(--ba-cor-secundaria, #081d7a) !important;
